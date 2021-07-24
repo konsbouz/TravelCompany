@@ -118,6 +118,7 @@ try {
     CustomerService customerService =new CustomerService();
     Customer customer=customerService.selectcustomerPername("Frederico Rossi");
     customerService.storeNewCustomer(customer);
+    ///sadddddddd
 }
 catch (Exception e){
 
