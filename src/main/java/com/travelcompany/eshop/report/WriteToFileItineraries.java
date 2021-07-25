@@ -18,7 +18,6 @@ public class WriteToFileItineraries implements FileWriter<Itinerary> {
 
     @Override
     public boolean writeFilesToExcel(List<Itinerary> list, String filepath) throws FileNotFoundException {
-
         Workbook workbook = new HSSFWorkbook();
         Sheet sheet = workbook.createSheet("Offered Itineraries");
 
@@ -40,9 +39,7 @@ public class WriteToFileItineraries implements FileWriter<Itinerary> {
         return false;
     }
 
-
     private void writeItinerary(Itinerary itinerary, Row row) {
-
 
         Cell cell = row.createCell(0);
         cell.setCellValue(itinerary.getDepartureAirportId());

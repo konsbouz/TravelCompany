@@ -13,6 +13,8 @@ public class CalculateFinalPriceService {
         double finalPrice = price - price* DiscountService.CalculateDiscount(category,paymentMethod );
 
         return finalPrice;
+
     }
+
 
 }

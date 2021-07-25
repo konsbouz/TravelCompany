@@ -1,6 +1,7 @@
 package com.travelcompany.eshop.service;
 import com.travelcompany.eshop.domain.Customer;
 import com.travelcompany.eshop.domain.Itinerary;
+import com.travelcompany.eshop.domain.PaymentMethod;
 import com.travelcompany.eshop.domain.Ticket;
 import com.travelcompany.eshop.repositories.CustomerRepository;
 import com.travelcompany.eshop.repositories.ItineraryRepository;
@@ -15,7 +16,8 @@ public class CustomerService {
         Customer customer= customerService.selectCustomerPerName(name);
         ItineraryRepository itineraryRepository = new ItineraryRepository();
         Itinerary itinerary=itineraryRepository.getFromDB1(destination);
-        Ticket ticket = TicketService.OrderTicket(customer,itinerary);
+        PaymentMethod paymentMethod = PaymentMethod.Credit_Card;
+        Ticket ticket = TicketService.OrderTicket(customer,itinerary,paymentMethod);
         TicketService ticketService = new TicketService();
         ticketService.StoreNewTicket(ticket);
     }

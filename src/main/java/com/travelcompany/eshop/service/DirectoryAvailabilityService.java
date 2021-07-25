@@ -6,13 +6,11 @@ import org.slf4j.LoggerFactory;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-public class DirectoryAvailabilityChecker {
-    Logger logger = LoggerFactory.getLogger(DirectoryAvailabilityChecker.class.getName());
+public class DirectoryAvailabilityService {
+    Logger logger = LoggerFactory.getLogger(DirectoryAvailabilityService.class.getName());
 
-    public boolean isOK(Path filepath) {
+    public boolean isAvailable(Path filepath) {
         if (Files.exists(filepath) && Files.isDirectory(filepath)) {
-
-
 
             return true;
         } else {
@@ -20,8 +18,5 @@ public class DirectoryAvailabilityChecker {
             logger.error("System requires the proper configuration for database backup");
             return false;
         }
-
     }
-
-
 }

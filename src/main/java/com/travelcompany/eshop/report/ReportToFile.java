@@ -5,6 +5,7 @@ import com.travelcompany.eshop.domain.Customer;
 import com.travelcompany.eshop.domain.Itinerary;
 import com.travelcompany.eshop.domain.OrderedTicket;
 import com.travelcompany.eshop.domain.Purchase;
+import com.travelcompany.eshop.service.ServiceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -56,7 +57,7 @@ public class ReportToFile {
 
     }
 
-    public void writeTotalTicketsAndSumToExcel(List<OrderedTicket> list, String filepath) throws FileNotFoundException {
+    public void writeTotalTicketsAndSumToExcel(List<OrderedTicket> list, String filepath) throws FileNotFoundException, ServiceException {
         WriteCostAndTicketsToFile writeCostAndTicketsToFile = new WriteCostAndTicketsToFile();
         writeCostAndTicketsToFile.writeFilesToExcel(list,filepath);
         logger.info("Total tickets and total sum written successfully under the following path {}" , filepath);

@@ -9,11 +9,11 @@ import java.sql.SQLException;
 
 public class TicketService {
 
-    public static Ticket OrderTicket (Customer customer,Itinerary itinerary) throws SQLException {
+    public static Ticket OrderTicket (Customer customer,Itinerary itinerary,PaymentMethod paymentMethod) throws SQLException {
         Ticket ticket = new Ticket();
         ticket.setCustomer(customer);
         ticket.setItinerary(itinerary);
-        ticket.setPaymentMethod(PaymentMethod.Cash);
+        ticket.setPaymentMethod(paymentMethod);
         ticket.setAmount(CalculateFinalPriceService.finalPriceCalculation(ticket));
 
         return ticket;

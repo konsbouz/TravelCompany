@@ -3,13 +3,10 @@ import com.travelcompany.eshop.report.*;
 import com.travelcompany.eshop.repositories.TicketsRepository;
 import com.travelcompany.eshop.service.*;
 import com.travelcompany.eshop.util.Directory;
-import org.apache.poi.ss.formula.functions.T;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.SQLException;
@@ -17,7 +14,7 @@ import java.util.List;
 
 public class Main {
 
-    public static void main(String[] args) throws IOException, SQLException {
+    public static void main(String[] args)  {
         Logger logger = LoggerFactory.getLogger(Main.class.getName());
 
         String perDestination = "select * from orderedtickets a inner join itineraries c on a.ItineraryId = c.Id order by DestinationAirportId";
@@ -26,8 +23,8 @@ public class Main {
 
         try {
             Path filepath1 = Paths.get(Directory.BACK_UP_DIRECTORY.getPath());
-            DirectoryAvailabilityChecker directoryAvailabilityChecker = new DirectoryAvailabilityChecker();
-            if(directoryAvailabilityChecker.isOK(filepath1)){
+            DirectoryAvailabilityService directoryAvailabilityService = new DirectoryAvailabilityService();
+            if(directoryAvailabilityService.isAvailable(filepath1)){
                 logger.info("System is able to backup the database");
 
             }
@@ -38,7 +35,7 @@ public class Main {
 
 
 //Write files to db
-          //  StoreToDbService storeToDbService = new StoreToDbService();
+        //    StoreToDbService storeToDbService = new StoreToDbService();
         //    storeToDbService.storeCustomersViaFile("customers.csv");
         //    storeToDbService.storeItinerariesViaFile("itineraries.csv");
         //    storeToDbService.storeTicketViaFile("orderedtickets.csv");
@@ -52,14 +49,12 @@ public class Main {
             reportToScreen.totalOfferedItinerariesPerDestination();
 
 
-//ReportstoFiles
+//Reports toFiles
             String filepath = Directory.FILE_DIRECTORY.getPath();
             ReportToFile reportToFile = new ReportToFile();
-
-
             CalculateReports calculateReports = new CalculateReports();
-            //Itineraries per destination
 
+            //Write Itineraries per destination/ per departure
             List<Itinerary> list1 = calculateReports.findItineraries(perDestination);
             List<Itinerary> list2 = calculateReports.findItineraries(perDeparture);
             reportToFile.writeItinerariesToExcel(list1, filepath + "itinerariesperdestination.xls");
@@ -68,21 +63,24 @@ public class Main {
             reportToFile.writeItinerariesToExcel(list2, filepath + "itinerariesperdeparture.xls");
 
 
-            //FindCustomersWithNoTickets
+            //Write to File CustomersWithNoTickets
             List<Customer> list3 = calculateReports.findCustomersWithNoTickets();
             reportToFile.writeCustomersWithNoTicketsToExcel(list3, filepath + "noticket.xls");
             reportToFile.writeCustomersWithNoTicketsToTxt(list3, filepath + "notickets.txt");
 
-            //FindCustomer/s with most tickets
+            //Write to File Customer/s with most tickets
             List<Purchase> list4 = calculateReports.findCustomersWithMostTickets();
             reportToFile.writeCustomerWithMostTicketsToExcel(list4, filepath + "mosttickets.xls");
             reportToFile.writeCustomerWithMostTicketsToTxt(list4, filepath + "mosttickets.txt");
 
 
-            //Calculate Max tickets and sum
+            //Write to File Max tickets and sum
             List<OrderedTicket> list5 = calculateReports.totalTicketsAndSumForAll();
             reportToFile.writeTotalTicketsAndSumToExcel(list5, filepath + "maxticketsandsum.xls");
             reportToFile.writeTotalTicketsAndSumToTxt(list5, filepath + "maxticketsandsum.txt");
+
+            //Purchase senario
+            CustomerService.Purchase("Dimitriou Dimitrios","DUB");
 
 
 
@@ -93,14 +91,11 @@ public class Main {
            // RestoreDb.backUpCustomers();
            // RestoreDb.backUpItineraries();
            // RestoreDb.backUpOrderedTickets();
+            // restoreDb.backUpAll(filepath1);
 
 
-
-
-            restoreDb.backUpAll(filepath1);
-
-
-
+            TicketsRepository ticketsRepository = new TicketsRepository();
+            System.out.println(ticketsRepository.getFromDB(13));
 
 
 

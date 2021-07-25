@@ -6,12 +6,15 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class WriteCostAndTicketsToFile implements FileWriter<OrderedTicket> {
+
 
     @Override
     public boolean writeFilesToTxt(List<OrderedTicket> list, String filepath) throws FileNotFoundException {
@@ -49,7 +52,7 @@ public class WriteCostAndTicketsToFile implements FileWriter<OrderedTicket> {
 
         try (FileOutputStream outputStream = new FileOutputStream(filepath)) {
             workbook.write(outputStream);
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return false;

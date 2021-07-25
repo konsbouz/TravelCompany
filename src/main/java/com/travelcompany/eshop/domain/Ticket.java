@@ -15,6 +15,10 @@ public class Ticket {
     protected PaymentMethod paymentMethod;
     private double amount;
 
-
-
+    public Ticket(Customer customer, Itinerary itinerary, PaymentMethod paymentMethod, double amount) {
+        this.customer = customer;
+        this.itinerary = itinerary;
+        this.paymentMethod = paymentMethod;
+        this.amount = amount;
+    }
 }

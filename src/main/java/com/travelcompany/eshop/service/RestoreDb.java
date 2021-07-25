@@ -15,12 +15,12 @@ import java.nio.file.Path;
 import java.sql.SQLException;
 
 public class RestoreDb {
-    DirectoryAvailabilityChecker directoryAvailabilityChecker = new DirectoryAvailabilityChecker();
+    DirectoryAvailabilityService directoryAvailabilityService = new DirectoryAvailabilityService();
 
     Logger logger = LoggerFactory.getLogger(RestoreDb.class.getName());
 
     public void backUpCustomers(Path filepath) throws SQLException {
-        if (directoryAvailabilityChecker.isOK(filepath)) {
+        if (directoryAvailabilityService.isAvailable(filepath)) {
             String filename = filepath + "/custoemersbackup.csv";
             try {
                 PrintStream fw = new PrintStream(filename);
@@ -51,7 +51,7 @@ public class RestoreDb {
     }
 
     public void backUpItineraries(Path filepath) throws SQLException {
-        if (directoryAvailabilityChecker.isOK(filepath)) {
+        if (directoryAvailabilityService.isAvailable(filepath)) {
             String filename = filepath + "/itinerariesbackup.csv";
             try {
                 PrintStream fw = new PrintStream(filename);
@@ -82,7 +82,7 @@ public class RestoreDb {
     }
 
     public void backUpOrderedTickets(Path filepath) throws SQLException {
-        if (directoryAvailabilityChecker.isOK(filepath)) {
+        if (directoryAvailabilityService.isAvailable(filepath)) {
             String filename = filepath + "/orderedticektsbackup.csv";
 
 

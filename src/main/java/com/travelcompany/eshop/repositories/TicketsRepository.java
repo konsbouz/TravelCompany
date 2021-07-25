@@ -47,10 +47,11 @@ public class TicketsRepository implements DbRepository<Ticket> {
     @Override
     public Ticket getFromDB(int id) throws SQLException, ServiceException {
         String SqlQuery = "select * from orderedtickets a inner join customers b on a.PassengerId=b.Id " +
-                "inner join itineraries c on a.ItineraryId = c.Id ";
+                "inner join itineraries c on a.ItineraryId = c.Id where a.id =? ";
         PreparedStatement st = null;
         try {
             st = DBConnectionService.getConnection().prepareStatement(SqlQuery);
+            st.setInt(1,id);
             CustomerRepository customerRepository = new CustomerRepository();
             ItineraryRepository itineraryRepository = new ItineraryRepository();
             ResultSet resultSet = st.executeQuery();
@@ -62,10 +63,6 @@ public class TicketsRepository implements DbRepository<Ticket> {
             ticket.setPaymentMethod(PaymentMethod.valueOf(resultSet.getString(4)));
             ticket.setAmount(resultSet.getDouble(5));
 
-
-            st.close();
-            DBConnectionService.getConnection().close();
-            System.out.println(ticket);
             return ticket;
         } catch (Exception e) {
             logger.error("retrieve tickets from db", e);
