@@ -2,7 +2,6 @@ package com.travelcompany.eshop.report;
 
 import com.travelcompany.eshop.api.FileWriter;
 import com.travelcompany.eshop.domain.Customer;
-import com.travelcompany.eshop.util.Directory;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;

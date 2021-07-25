@@ -11,7 +11,7 @@ import java.io.IOException;
 public class ParserService {
     Logger logger = LoggerFactory.getLogger(ParserService.class.getName());
     private static final CSVFormat format = CSVFormat.EXCEL ;
-    private static final String directory = Directory.FILE_DIRECTORY.getPath();
+    private static final String directory = "C:\\Users\\BouzouKo\\travelcompany\\csvfilesfordb\\";
 
 
     public static CSVParser CsvParser(String filename) throws IOException {

@@ -55,7 +55,6 @@ public class WriteToFileItineraries implements FileWriter<Itinerary> {
         cell = row.createCell(4);
         cell.setCellValue(itinerary.getPrice());
 
-
     }
 
     private void writeHeaders(Row row) {
