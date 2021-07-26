@@ -1,13 +1,13 @@
 package com.travelcompany.eshop.repositories;
+
 import com.travelcompany.eshop.api.DbRepository;
 import com.travelcompany.eshop.domain.Category;
 import com.travelcompany.eshop.domain.Customer;
-import com.travelcompany.eshop.service.DBConnectionService;
+import com.travelcompany.eshop.database.DBConnectionService;
 import com.travelcompany.eshop.service.ServiceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.sql.rowset.serial.SerialException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,10 +18,10 @@ public class CustomerRepository implements DbRepository<Customer> {
     Logger logger = LoggerFactory.getLogger(CustomerRepository.class.getName());
 
     @Override
-    public  int [] addToDb(Customer customer) throws Exception {
+    public int[] addToDb(Customer customer) throws Exception {
 
         String SqlQuery = "Insert into customers (Id ,FullName, Email, AddressCity, Nationality,Category) values (?, ?, ?, ?, ?, ?)";
-        PreparedStatement st =  null;
+        PreparedStatement st = null;
         try {
             st = DBConnectionService.getConnection().prepareStatement(SqlQuery);
             st.setInt(1, customer.getId());
@@ -34,13 +34,11 @@ public class CustomerRepository implements DbRepository<Customer> {
             int[] rowsAffected = st.executeBatch();
             logger.info("Insert command was successful with {} row(s) affected.", rowsAffected);
             return rowsAffected;
-        }
-        catch (Exception e){
-            logger.error("insert customer failed",e);
-            throw  new ServiceException();
-        }
-        finally {
-            if(st != null){
+        } catch (Exception e) {
+            logger.error("insert customer failed", e);
+            throw new ServiceException();
+        } finally {
+            if (st != null) {
                 st.close();
 
             }
@@ -143,7 +141,7 @@ public class CustomerRepository implements DbRepository<Customer> {
     }
 
     @Override
-    public List<Customer> GetAllFromDb( ) throws SQLException, ServiceException {
+    public List<Customer> GetAllFromDb() throws SQLException, ServiceException {
         String SqlQuery = "select * from customers";
         PreparedStatement st = null;
         try {
@@ -161,11 +159,10 @@ public class CustomerRepository implements DbRepository<Customer> {
                 customers.add(customer);
             }
             return customers;
-        }
-        catch (Exception e){
-            logger.error("retrieve all customers from db failed",e);
+        } catch (Exception e) {
+            logger.error("retrieve all customers from db failed", e);
             throw new ServiceException();
-        }finally {
+        } finally {
             if (st != null) {
                 st.close();
             }

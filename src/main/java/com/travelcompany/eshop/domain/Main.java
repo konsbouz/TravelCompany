@@ -1,15 +1,15 @@
 package com.travelcompany.eshop.domain;
+import com.travelcompany.eshop.database.RestoreDb;
+import com.travelcompany.eshop.database.StoreToDbService;
 import com.travelcompany.eshop.report.*;
-import com.travelcompany.eshop.repositories.TicketsRepository;
+import com.travelcompany.eshop.repositories.CustomerRepository;
 import com.travelcompany.eshop.service.*;
-import com.travelcompany.eshop.util.Directory;
+import com.travelcompany.eshop.directory.Directory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.sql.SQLException;
 import java.util.List;
 
 public class Main {
@@ -29,16 +29,16 @@ public class Main {
 
             }
             else {
-                logger.error("System requires the proper configuration");
+                logger.error("The configured path for database backup is not valid.");
                 System.exit(-1);
             }
 
 
 //Write files to db
-        //    StoreToDbService storeToDbService = new StoreToDbService();
-        //    storeToDbService.storeCustomersViaFile("customers.csv");
-        //    storeToDbService.storeItinerariesViaFile("itineraries.csv");
-        //    storeToDbService.storeTicketViaFile("orderedtickets.csv");
+            StoreToDbService storeToDbService = new StoreToDbService();
+            storeToDbService.storeCustomersViaFile("customers.csv");
+            storeToDbService.storeItinerariesViaFile("itineraries.csv");
+            storeToDbService.storeTicketViaFile("orderedtickets.csv");
 
 //Screen reporting
             ReportToScreen reportToScreen = new ReportToScreen();
@@ -80,24 +80,19 @@ public class Main {
             reportToFile.writeTotalTicketsAndSumToTxt(list5, filepath + "maxticketsandsum.txt");
 
             //Purchase senario
-            CustomerService.Purchase("Dimitriou Dimitrios","DUB");
-
-
-
+           // CustomerService.Purchase("Dimitriou Dimitrios","DUB");
 
 
 // RestoreDB
             RestoreDb restoreDb = new RestoreDb();
-           // RestoreDb.backUpCustomers();
-           // RestoreDb.backUpItineraries();
-           // RestoreDb.backUpOrderedTickets();
-            // restoreDb.backUpAll(filepath1);
+            restoreDb.backUpCustomers(filepath1);
+            restoreDb.backUpItineraries(filepath1);
+            restoreDb.backUpOrderedTickets(filepath1);
+            restoreDb.backUpAll(filepath1);
 
 
-            TicketsRepository ticketsRepository = new TicketsRepository();
-            System.out.println(ticketsRepository.getFromDB(13));
-
-
+            CustomerRepository customerRepository = new CustomerRepository();
+            customerRepository.GetAllFromDb();
 
 
 

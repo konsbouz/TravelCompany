@@ -1,4 +1,4 @@
-package com.travelcompany.eshop.service;
+package com.travelcompany.eshop.database;
 
 import com.travelcompany.eshop.domain.Customer;
 import com.travelcompany.eshop.domain.Itinerary;
@@ -6,6 +6,8 @@ import com.travelcompany.eshop.domain.Ticket;
 import com.travelcompany.eshop.repositories.CustomerRepository;
 import com.travelcompany.eshop.repositories.ItineraryRepository;
 import com.travelcompany.eshop.repositories.TicketsRepository;
+import com.travelcompany.eshop.service.DirectoryAvailabilityService;
+import com.travelcompany.eshop.service.ServiceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

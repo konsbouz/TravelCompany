@@ -1,10 +1,12 @@
-package com.travelcompany.eshop.service;
+package com.travelcompany.eshop.database;
 import com.travelcompany.eshop.domain.Customer;
 import com.travelcompany.eshop.domain.Itinerary;
 import com.travelcompany.eshop.domain.Ticket;
 import com.travelcompany.eshop.repositories.CustomerRepository;
 import com.travelcompany.eshop.repositories.ItineraryRepository;
 import com.travelcompany.eshop.repositories.TicketsRepository;
+import com.travelcompany.eshop.service.CSVReaderService;
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;

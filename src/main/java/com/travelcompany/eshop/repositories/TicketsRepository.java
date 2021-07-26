@@ -3,7 +3,7 @@ package com.travelcompany.eshop.repositories;
 import com.travelcompany.eshop.api.DbRepository;
 import com.travelcompany.eshop.domain.PaymentMethod;
 import com.travelcompany.eshop.domain.Ticket;
-import com.travelcompany.eshop.service.DBConnectionService;
+import com.travelcompany.eshop.database.DBConnectionService;
 import com.travelcompany.eshop.service.ServiceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

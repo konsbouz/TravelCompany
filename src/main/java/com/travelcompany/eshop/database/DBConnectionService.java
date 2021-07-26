@@ -1,4 +1,4 @@
-package com.travelcompany.eshop.service;
+package com.travelcompany.eshop.database;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

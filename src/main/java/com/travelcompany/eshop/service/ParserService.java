@@ -1,5 +1,4 @@
 package com.travelcompany.eshop.service;
-import com.travelcompany.eshop.util.Directory;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.slf4j.Logger;
@@ -21,7 +20,7 @@ public class ParserService {
         try {
             BufferedReader lineReader = new BufferedReader(new FileReader(directory+ filename));
             CSVParser records = CSVParser.parse(lineReader, format.withFirstRecordAsHeader().withIgnoreHeaderCase().withTrim());
-            logger.info("CSV file has been read successfully ");
+            logger.info("CSV file {} has been read successfully ",filename);
 
             return records;
 

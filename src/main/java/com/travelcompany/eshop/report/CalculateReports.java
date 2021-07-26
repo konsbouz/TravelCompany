@@ -1,7 +1,7 @@
 package com.travelcompany.eshop.report;
 import com.travelcompany.eshop.domain.*;
 import com.travelcompany.eshop.repositories.CustomerRepository;
-import com.travelcompany.eshop.service.DBConnectionService;
+import com.travelcompany.eshop.database.DBConnectionService;
 import com.travelcompany.eshop.service.ServiceException;
 
 import java.sql.PreparedStatement;
